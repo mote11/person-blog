@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author author
  * @since 2024-05-30
  */
-//@Service
+@Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements ICategoryService {
 
 }
