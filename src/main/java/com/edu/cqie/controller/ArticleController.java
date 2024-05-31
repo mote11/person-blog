@@ -1,9 +1,13 @@
 package com.edu.cqie.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.edu.cqie.entity.Article;
+import com.edu.cqie.entity.Result;
+import com.edu.cqie.service.impl.ArticleServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,47 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
+
+    @Autowired
+    private ArticleServiceImpl articleServiceImpl;
+
+    /**
+     * 发布文章，开始状态为audit，审核中
+     * @param article
+     * @return
+     */
+    @PostMapping("/up")
+    public Result upload(Article article){
+        articleServiceImpl.addArticle(article);
+        return Result.success("文章发布成功，等待审核");
+    }
+
+    /**
+     * 跟据文章分类查询出该类型的所有文章
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list")
+    public Result findArticle(@RequestParam(name="categoryId") Integer categoryId){
+        //@RequestParam(name="categoryId")可加可不加，因为前端传递数据的名称也是categoryId，与函数参数名一致
+        List<Article> article = articleServiceImpl.findArticle(categoryId);
+        //输出获取到的数据
+        for (Article article1 : article) {
+            System.out.println(article1);
+        }
+        return Result.success(article);
+    }
+
+
+    /**
+     * 获取文章详情
+     * @param articleId
+     * @return
+     */
+    @GetMapping
+    public Result articleDes(@RequestParam(name="article_id")Integer articleId){
+        Article article = articleServiceImpl.findArticleById(articleId);
+        return Result.success(article);
+    }
 
 }
