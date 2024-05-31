@@ -46,9 +46,9 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param articleId
      * @param article
      */
-    @Update("update article set title=#{title},content=#{content},category_id=#{categoryId}," +
-            "author_id=#{authorId},update_time=now(),status='audit' where article_id=#{articleId}")
-    void editArticle(Integer articleId,Article article);
+    @Update("update article set title=#{article.title},content=#{article.content},category_id=#{article.categoryId}," +
+            "author_id=#{article.authorId},update_time=now(),status='audit' where article_id=#{articleId}")
+    void editArticle(@Param("articleId")Integer articleId,@Param("article")Article article);
 
     /**
      * 删除文章
