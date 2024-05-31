@@ -2,9 +2,7 @@ package com.edu.cqie.mapper;
 
 import com.edu.cqie.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -42,4 +40,20 @@ public interface ArticleMapper extends BaseMapper<Article> {
      */
     @Select("select * from article where article_id=#{articleId}")
     Article findArticleById(Integer articleId);
+
+    /**
+     * 文章修改
+     * @param articleId
+     * @param article
+     */
+    @Update("update article set title=#{title},content=#{content},category_id=#{categoryId}," +
+            "author_id=#{authorId},update_time=now(),status='audit' where article_id=#{articleId}")
+    void editArticle(Integer articleId,Article article);
+
+    /**
+     * 删除文章
+     * @param articleId
+     */
+    @Delete("delete from article where article_id=#{articleId}")
+    void deleteArticle(Integer articleId);
 }

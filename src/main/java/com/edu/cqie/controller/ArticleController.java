@@ -62,5 +62,45 @@ public class ArticleController {
         Article article = articleServiceImpl.findArticleById(articleId);
         return Result.success(article);
     }
+//=====================================================
+    /**
+     * 修改文章有点问题，后面再改
+     * @param articleId
+     * @param article
+     * @return
+     */
+    @PutMapping
+    public Result editArticle(@RequestParam(name="article_id")Integer articleId,Article article){
+        //修改文章
+        System.out.println(article.toString());
+        System.out.println(articleId);
+        articleServiceImpl.editArticle(articleId,article);
+        return Result.success("文章修改成功");
+    }
+//=====================================================
+
+    /**
+     * 删除文章
+     * @param articleId
+     * @return
+     */
+    @DeleteMapping
+    public Result deleteArticle(@RequestParam(name="article_id")Integer articleId){
+        articleServiceImpl.deleteArticle(articleId);
+        return Result.success("删除文章成功");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

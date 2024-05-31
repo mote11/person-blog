@@ -47,4 +47,21 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public Article findArticleById(Integer articleId){
         return articleMapper.findArticleById(articleId);
     }
+
+    /**
+     * 修改文章
+     * @param articleId
+     * @param article
+     */
+    public void editArticle(Integer articleId,Article article){
+        articleMapper.editArticle(articleId,article);
+    }
+
+    /**
+     * 删除文章
+     * @param articleId
+     */
+    public void deleteArticle(Integer articleId){
+        articleMapper.deleteArticle(articleId);
+    }
 }
