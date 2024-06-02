@@ -16,4 +16,10 @@ public interface IUserService extends IService<User> {
     User findByUserName(String username);
     //注册用户
     void register(String username,String password,String email);
+    //更新用户
+    void updateUser(User user);
+    //更新用户头像
+    void updateAvatar(String avatarUrl);
+    //修改密码
+    void updatePwd(String rePwd);
 }

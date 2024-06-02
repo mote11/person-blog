@@ -46,10 +46,14 @@ public class Article implements Serializable {
      */
     private Integer categoryId;
 
+    private Category category;
+
     /**
      * 外键
      */
     private Integer authorId;
+
+    private User user;
 
     /**
      * 状态

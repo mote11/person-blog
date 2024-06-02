@@ -5,8 +5,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 /**
@@ -29,6 +36,7 @@ public class User implements Serializable {
      * 主键，自增
      */
     @TableId(value = "user_id", type = IdType.AUTO)
+    @NotNull
     private Integer userId;
 
     /**
@@ -39,16 +47,21 @@ public class User implements Serializable {
     /**
      * 密码
      */
+    @JsonIgnore//让springmvc把当前对象转换成json字符串的时候，忽略password
     private String password;
 
     /**
      * 昵称
      */
+    @NotEmpty
+    @Pattern(regexp = "^\\S{1,10}$")
     private String nickname;
 
     /**
      * 邮箱
      */
+    @NotEmpty
+    @Email
     private String email;
 
     /**
