@@ -4,8 +4,11 @@ import com.edu.cqie.entity.Category;
 import com.edu.cqie.mapper.CategoryMapper;
 import com.edu.cqie.service.ICategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.edu.cqie.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -22,24 +25,26 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     /**
      * 新增文章类别
-     * @param userId
      * @param categoryName
      */
     @Override
-    public void addCategory(Integer userId, String categoryName) {
+    public void addCategory( String categoryName) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("id");
+
         categoryMapper.addCategory(userId,categoryName);
     }
 
 
     /**
      * 编辑类别
-     * @param categoryId
-     * @param categoryName
-     * @param userId
      */
     @Override
-    public void editCategory(Integer categoryId, String categoryName,Integer userId) {
-        categoryMapper.editCategory(categoryId,categoryName,userId);
+    public void editCategory(Category category) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("id");
+        category.setUserId(userId);
+        categoryMapper.editCategory(category);
     }
 
     /**
@@ -47,7 +52,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
      * @param categoryId
      */
     @Override
-    public void deleteCategory(Integer categoryId) {
-        categoryMapper.deleteCategory(categoryId);
+    public void deleteCategory(Category category) {
+        categoryMapper.deleteCategory(category);
     }
 }

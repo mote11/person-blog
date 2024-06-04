@@ -27,17 +27,15 @@ public interface CategoryMapper extends BaseMapper<Category> {
 
     /**
      * 编辑类别
-     * @param categoryId
-     * @param categoryName
-     * @param userId
+     * @param category
      */
     @Update("update category set category_name=#{categoryName},user_id=#{userId},update_time=now() where category_id=#{categoryId}")
-    void editCategory(@Param("categoryId") Integer categoryId,@Param("categoryName")String categoryName,@Param("userId")Integer userId);
+    void editCategory(Category category);
 
     /**
      * 删除类别
-     * @param categoryId
+     * @param category
      */
     @Delete("delete from category where category_id=#{categoryId}")
-    void deleteCategory(Integer categoryId);
+    void deleteCategory(Category category);
 }

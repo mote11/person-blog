@@ -13,9 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICategoryService extends IService<Category> {
     //新增类别
-    void addCategory(Integer userId,String categoryName);
+    void addCategory(String categoryName);
     //编辑类别
-    void editCategory(Integer categoryId,String categoryName,Integer userId);
+    void editCategory(Category category);
     //删除类别
-    void deleteCategory(Integer categoryId);
+    void deleteCategory(Category category);
 }

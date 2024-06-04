@@ -9,6 +9,7 @@ import com.edu.cqie.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,33 +53,31 @@ public class CategoryController {
 
     /**
      * 新增文章类别
-     * @param userId
-     * @param categoryName
+     * @param
      * @return
      */
     @PostMapping("/add")
-    public Result addCategory(Integer userId, String categoryName){
-        categoryServiceImpl.addCategory(userId,categoryName);
+    public Result addCategory(@Validated(Category.Add.class) Category category){
+        categoryServiceImpl.addCategory(category.getCategoryName());
         return Result.success("新增成功");
     }
 
     /**
      * 编辑类别
-     * @param categoryId
-     * @param categoryName
      * @return
      */
     @PutMapping
-    public Result editCategory(@RequestParam(name = "category_id")Integer categoryId,String categoryName){
+    public Result editCategory(@Validated(Category.Edit.class) Category category){
         //userId可以通过session获取，现在先写死
-        categoryServiceImpl.editCategory(categoryId,categoryName,2);
+        categoryServiceImpl.editCategory(category);
         return Result.success("修改成功");
     }
 
 
     @DeleteMapping
-    public Result deleteCategory(@RequestParam(name = "categoryId")Integer categoryId){
-        categoryServiceImpl.deleteCategory(categoryId);
+    public Result deleteCategory(@Validated(Category.Delete.class) Category category){
+        categoryServiceImpl.deleteCategory(category);
         return Result.success("删除类别成功");
     }
+
 }
