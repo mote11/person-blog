@@ -2,12 +2,14 @@ package com.edu.cqie.controller;
 
 
 import com.edu.cqie.entity.Article;
+import com.edu.cqie.entity.PageBean;
 import com.edu.cqie.entity.Result;
 import com.edu.cqie.service.impl.ArticleServiceImpl;
 import com.edu.cqie.utils.JwtUtil;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class ArticleController {
      * @return
      */
     @PostMapping("/up")
-    public Result upload(Article article) {
+    public Result addArticle(@RequestBody @Validated Article article) {
         articleServiceImpl.addArticle(article);
         return Result.success("文章发布成功，等待审核");
     }
@@ -72,6 +74,7 @@ public class ArticleController {
 
     /**
      * 修改文章有点问题，后面再改
+     * 已解决
      *
      * @param articleId
      * @param article
@@ -99,6 +102,72 @@ public class ArticleController {
         return Result.success("删除文章成功");
     }
 
+    /**
+     * 条件分页查询
+     * @param pageNum
+     * @param pageSize
+     * @param categoryId
+     * @param status
+     * @return
+     */
+    @GetMapping("/page")
+    public  Result<PageBean<Article>> list(
+            Integer pageNum,Integer pageSize,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false)String status){
+       PageBean<Article> pb=articleServiceImpl.articleList(pageNum,pageSize,categoryId,status);
+        System.out.println(pb);
+       return Result.success(pb);
+    }
+
+    /**
+     * 修改文章状态
+     * @param status
+     * @return
+     */
+    @PutMapping("/check")
+    public Result checkArticle(String status,Integer articleId){
+        articleServiceImpl.checkArticle(status,articleId);
+        return Result.success("审核成功");
+    }
+
+    /**
+     * 查询所有文章信息（管理员）
+     * @param pageNum
+     * @param pageSize
+     * @param status
+     * @return
+     */
+    @GetMapping("/all")
+    public Result<PageBean<Article>> findAllArticle(
+            Integer pageNum,Integer pageSize,
+            @RequestParam(required = false)String status){
+        if(status!=null){
+            PageBean<Article> pb=articleServiceImpl.findArticleByStatus(pageNum,pageSize,status);
+            System.out.println(pb);
+            return Result.success(pb);
+        }else{
+            PageBean<Article> pb=articleServiceImpl.findAllArticle(pageNum,pageSize);
+            System.out.println(pb);
+            return Result.success(pb);
+        }
+    }
+
+    /**
+     * 跟据状态查询
+     * @param pageNum
+     * @param pageSize
+     * @param status
+     * @return
+     */
+    /*@GetMapping("/byStatus")
+    public Result<PageBean<Article>> findArticleByStatus(
+            Integer pageNum,Integer pageSize,
+            @RequestParam(name = "status")String status){
+        PageBean<Article> pb=articleServiceImpl.findArticleByStatus(pageNum,pageSize,status);
+        System.out.println(pb);
+        return Result.success(pb);
+    }*/
 }
 
 

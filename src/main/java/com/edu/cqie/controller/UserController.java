@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -163,5 +164,12 @@ public class UserController {
         //调用service完成密码更新
         userServiceImpl.updatePwd(rePwd);
         return Result.success("密码修改成功");
+    }
+
+
+    @GetMapping("/list")
+    public Result showAll(){
+        List<User> list = userServiceImpl.list();
+        return Result.success(list);
     }
 }

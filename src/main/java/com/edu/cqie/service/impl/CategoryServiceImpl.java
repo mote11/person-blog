@@ -52,7 +52,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
      * @param categoryId
      */
     @Override
-    public void deleteCategory(Category category) {
-        categoryMapper.deleteCategory(category);
+    public void deleteCategory(Integer categoryId) {
+        categoryMapper.deleteCategory(categoryId);
     }
 }

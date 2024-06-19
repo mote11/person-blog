@@ -47,7 +47,7 @@ public class CategoryController {
 //            return Result.error("未登录");
 //        }
         List<Category> list = categoryServiceImpl.list();
-        System.out.println(list);
+//        System.out.println(list);
         return Result.success(list);
     }
 
@@ -75,8 +75,8 @@ public class CategoryController {
 
 
     @DeleteMapping
-    public Result deleteCategory(@Validated(Category.Delete.class) Category category){
-        categoryServiceImpl.deleteCategory(category);
+    public Result deleteCategory(/*@Validated(Category.Delete.class)*/ @RequestParam(name = "categoryId") Integer categoryId){
+        categoryServiceImpl.deleteCategory(categoryId);
         return Result.success("删除类别成功");
     }
 

@@ -17,5 +17,5 @@ public interface ICategoryService extends IService<Category> {
     //编辑类别
     void editCategory(Category category);
     //删除类别
-    void deleteCategory(Category category);
+    void deleteCategory(Integer categoryId);
 }

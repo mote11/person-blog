@@ -49,6 +49,7 @@ public class Category implements Serializable {
      * 外键
      */
     private Integer userId;
+//    private User user;
 
     /**
      * 更新时间

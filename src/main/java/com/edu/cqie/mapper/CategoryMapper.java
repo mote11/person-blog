@@ -37,5 +37,5 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @param category
      */
     @Delete("delete from category where category_id=#{categoryId}")
-    void deleteCategory(Category category);
+    void deleteCategory(Integer category);
 }

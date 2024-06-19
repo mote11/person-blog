@@ -35,12 +35,12 @@ public class Comments implements Serializable {
      * 外键
      */
     private Integer articleId;
-
+    private Article article;
     /**
      * 外键
      */
     private Integer userId;
-
+    private User user;
     /**
      * 内容
      */

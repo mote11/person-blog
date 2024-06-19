@@ -2,6 +2,7 @@ package com.edu.cqie.service;
 
 import com.edu.cqie.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.edu.cqie.entity.PageBean;
 
 import java.util.List;
 
@@ -24,4 +25,12 @@ public interface IArticleService extends IService<Article> {
     void editArticle(Integer articleId,Article article);
     //删除文章
     void deleteArticle(Integer articleId);
+    //条件分页列表查询
+    PageBean<Article> articleList(Integer pageNum, Integer pageSize, Integer categoryId, String status);
+    //修该文章状态
+    void checkArticle(String status,Integer articleId);
+    //管理员查询文章
+    PageBean<Article> findAllArticle(Integer pageNum, Integer pageSize);
+    //跟据文章状态查询
+    PageBean<Article> findArticleByStatus(Integer pageNum, Integer pageSize, String status);
 }
