@@ -67,7 +67,7 @@ public class ArticleController {
      * @return
      */
     @GetMapping
-    public Result articleDes(@RequestParam(name = "article_id") Integer articleId) {
+    public Result articleDes(/*@RequestParam(name = "articleId")*/ Integer articleId) {
         Article article = articleServiceImpl.findArticleById(articleId);
         return Result.success(article);
     }
@@ -81,7 +81,7 @@ public class ArticleController {
      * @return
      */
     @PutMapping
-    public Result editArticle(@RequestParam(name = "article_id") Integer articleId, Article article) {
+    public Result editArticle(@RequestParam(name = "articleId") Integer articleId, Article article) {
         //修改文章
         System.out.println(article.toString());
         System.out.println(articleId);
@@ -97,7 +97,7 @@ public class ArticleController {
      * @return
      */
     @DeleteMapping
-    public Result deleteArticle(@RequestParam(name = "article_id") Integer articleId) {
+    public Result deleteArticle(@RequestParam(name = "articleId") Integer articleId) {
         articleServiceImpl.deleteArticle(articleId);
         return Result.success("删除文章成功");
     }

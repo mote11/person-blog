@@ -140,9 +140,9 @@ public class UserController {
     @PatchMapping("/updatePwd")
     public Result updatePwd(@RequestBody Map<String,String> params){
         //校验参数
-        String oldPwd = params.get("old_pwd");
-        String newPwd = params.get("new_pwd");
-        String rePwd = params.get("re_pwd");
+        String oldPwd = params.get("oldPwd");
+        String newPwd = params.get("newPwd");
+        String rePwd = params.get("rePwd");
 
         if(!StringUtils.hasLength(oldPwd)||!StringUtils.hasLength(newPwd)||!StringUtils.hasLength(rePwd)){
             return Result.error("参数未传递完整");

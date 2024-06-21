@@ -62,6 +62,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
      * @param article
      */
     public void editArticle(Integer articleId,Article article){
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        article.setAuthorId(id);
         articleMapper.editArticle(articleId,article);
     }
 

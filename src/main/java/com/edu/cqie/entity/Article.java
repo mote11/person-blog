@@ -56,14 +56,14 @@ public class Article implements Serializable {
     @NotNull
     private Integer categoryId;
 
-    private Category category;
+//    private Category category;
 
     /**
      * 外键
      */
     private Integer authorId;
 
-    private User user;
+//    private User user;
 
     /**
      * 状态 audit-审核中,publish-发布，reject-驳回
@@ -74,13 +74,15 @@ public class Article implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
 
